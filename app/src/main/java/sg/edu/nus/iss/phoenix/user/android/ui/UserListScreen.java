@@ -84,6 +84,9 @@ public class UserListScreen extends AppCompatActivity {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
         // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.menu_list, menu);
+        // For UserListScreen, hide the "copy" menu item
+        MenuItem menuItem = menu.findItem(R.id.action_copy);
+        menuItem.setVisible(false);
         return true;
     }
 
@@ -108,7 +111,7 @@ public class UserListScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //ControlFactory.getUserController().maintainUser();
+        ControlFactory.getUserController().maintainedUser();
     }
 
     public void showUsers(List<User> users) {
