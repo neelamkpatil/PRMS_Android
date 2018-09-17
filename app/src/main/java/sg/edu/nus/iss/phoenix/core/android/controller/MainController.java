@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import sg.edu.nus.iss.phoenix.core.android.ui.MainScreen;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
+import sg.edu.nus.iss.phoenix.user.entity.User;
 
 public class MainController {
     private static Application app = null;
@@ -44,6 +45,9 @@ public class MainController {
         startUseCase(username);
     }
 
+    public void maintainedUser() {
+        startUseCase(username);
+    }
     public void selectLogout() {
         username = "<not logged in>";
         ControlFactory.getLoginController().logout();
@@ -55,8 +59,14 @@ public class MainController {
         ControlFactory.getReviewSelectProgramController().startUseCase();
     }
 
+    public void selectMaintainUser() {
+        ControlFactory.getUserController().startUseCase();
+    }
     // This is a dummy operation to test the invocation of Review Select Radio Program use case.
     public void selectedProgram(RadioProgram rpSelected) {
+        startUseCase(username);
+    }
+    public void selectedUser(User urSelected) {
         startUseCase(username);
     }
 }

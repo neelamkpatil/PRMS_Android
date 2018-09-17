@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UserId"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="User Id" />
+
+    <TextView
+        android:id="@+id/maintain_user_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Radio Program Name" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="User Name" />
+
+    <TextView
+        android:id="@+id/maintain_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="one" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Role"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="User Role" />
+
+    <TextView
+        android:id="@+id/maintain_user_role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="20"
+        android:text="Admin"
+        tools:text="Admin" />
+
+</LinearLayout>
