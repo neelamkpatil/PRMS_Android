@@ -19,7 +19,7 @@ public class MainController {
     public static void setApp(Application app) {
         MainController.app = app;
     }
-// test push on branch
+
     public static void displayScreen(Intent intent) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         app.startActivity(intent);
@@ -48,6 +48,10 @@ public class MainController {
     public void maintainedUser() {
         startUseCase(username);
     }
+	
+	public void maintainedSchedule() {
+        startUseCase(username);
+    }
     public void selectLogout() {
         username = "<not logged in>";
         ControlFactory.getLoginController().logout();
@@ -55,8 +59,7 @@ public class MainController {
 
     public void selectMaintainSchedule() {
         // This is the placeholder for starting the Maintain Schedule use case.
-        // At present, it ii used to test the invocation of  Review Select Radio Program use case.
-        ControlFactory.getReviewSelectProgramController().startUseCase();
+		ControlFactory.getScheduleController().startUseCase();
     }
 
     public void selectMaintainUser() {
