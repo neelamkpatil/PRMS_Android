@@ -18,7 +18,7 @@ public class MainController {
     public static void setApp(Application app) {
         MainController.app = app;
     }
-
+// test push on branch
     public static void displayScreen(Intent intent) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         app.startActivity(intent);
