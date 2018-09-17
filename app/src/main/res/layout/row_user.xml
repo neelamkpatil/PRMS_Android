@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="UserId"
+        android:text="User Id"
         android:textSize="20sp"
         android:textStyle="bold"
         tools:text="User Id" />
@@ -18,7 +18,7 @@
         android:id="@+id/maintain_user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Radio Program Name" />
+        tools:text="User Id" />
 
     <TextView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         android:id="@+id/maintain_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="one" />
+        tools:text="User name" />
 
     <TextView
         android:layout_width="match_parent"

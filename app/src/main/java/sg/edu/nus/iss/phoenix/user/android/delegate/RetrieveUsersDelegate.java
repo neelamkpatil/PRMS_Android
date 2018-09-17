@@ -17,13 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 import sg.edu.nus.iss.phoenix.user.android.controller.ReviewSelectUserController;
 import sg.edu.nus.iss.phoenix.user.android.controller.UserController;
 import sg.edu.nus.iss.phoenix.user.entity.Role;
 import sg.edu.nus.iss.phoenix.user.entity.User;
 
-import static sg.edu.nus.iss.phoenix.core.android.delegate.DelegateHelper.PRMS_BASE_URL_RADIO_PROGRAM;
 import static sg.edu.nus.iss.phoenix.core.android.delegate.DelegateHelper.PRMS_BASE_URL_USER;
 
 /**
@@ -39,7 +37,7 @@ public class RetrieveUsersDelegate extends AsyncTask<String, Void, String> {
 
     public RetrieveUsersDelegate(UserController userController) {
         this.reviewSelectUserController = null;
-        this.UserController= userController;
+        this.UserController = userController;
     }
 
     public RetrieveUsersDelegate(ReviewSelectUserController reviewSelectProgramController) {
@@ -49,7 +47,7 @@ public class RetrieveUsersDelegate extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        Uri builtUri1 = Uri.parse( PRMS_BASE_URL_USER).buildUpon().build();
+        Uri builtUri1 = Uri.parse(PRMS_BASE_URL_USER).buildUpon().build();
         Uri builtUri = Uri.withAppendedPath(builtUri1, params[0]).buildUpon().build();
         Log.v(TAG, builtUri.toString());
         URL url = null;
@@ -91,19 +89,19 @@ public class RetrieveUsersDelegate extends AsyncTask<String, Void, String> {
                     JSONObject urJson = urArray.getJSONObject(i);
                     String id = urJson.getString("id");
                     String name = urJson.getString("name");
-                    JSONArray roles=urJson.getJSONArray("roles");
-                    ArrayList<Role> r=new ArrayList<Role>();
-                    for (int j=0;j<roles.length();j++){
-                        JSONObject roleJson=roles.getJSONObject(j);
-                        String role=roleJson.getString("role");
-                        String accessPrivilege="No";
-                        if (role.equals("admin")){
-                            accessPrivilege="Yes";
+                    JSONArray roles = urJson.getJSONArray("roles");
+                    ArrayList<Role> r = new ArrayList<Role>();
+                    for (int j = 0; j < roles.length(); j++) {
+                        JSONObject roleJson = roles.getJSONObject(j);
+                        String role = roleJson.getString("role");
+                        String accessPrivilege = "No";
+                        if (role.equals("admin")) {
+                            accessPrivilege = "Yes";
                         }
-                        Role role1=new Role(role,accessPrivilege);
+                        Role role1 = new Role(role, accessPrivilege);
                         r.add(role1);
                     }
-                    users.add(new User(id,"",name, r));
+                    users.add(new User(id, "", name, r));
                 }
             } catch (JSONException e) {
                 Log.v(TAG, e.getMessage());

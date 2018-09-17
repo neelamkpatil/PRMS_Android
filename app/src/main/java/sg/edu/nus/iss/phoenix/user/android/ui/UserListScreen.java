@@ -17,7 +17,6 @@ import java.util.List;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
-
 import sg.edu.nus.iss.phoenix.user.entity.User;
 
 /**
@@ -29,6 +28,7 @@ public class UserListScreen extends AppCompatActivity {
     private UserAdapter mURAdapter;
     private User selectedUR = null;
     private static final String TAG = UserListScreen.class.getName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,14 @@ public class UserListScreen extends AppCompatActivity {
         ArrayList<User> users = new ArrayList<User>();
         mURAdapter = new UserAdapter(this, users);
 
+        // Setup FAB to open EditorActivity
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                ControlFactory.getUserController().selectCreateUser();
+            }
+        });
 
         mListView = (ListView) findViewById(R.id.radio_ur_list);
         mListView.setAdapter(mURAdapter);
@@ -54,6 +62,7 @@ public class UserListScreen extends AppCompatActivity {
                 // Log.v(TAG, "Radio program name is " + rp.getRadioProgramName());
                 selectedUR = ur;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // your stuff
@@ -88,8 +97,7 @@ public class UserListScreen extends AppCompatActivity {
                     // Prompt for the selection of a radio program.
                     Toast.makeText(this, "Select a user first! Use arrow keys on emulator", Toast.LENGTH_SHORT).show();
                     Log.v(TAG, "There is no selected user.");
-                }
-                else {
+                } else {
                     Log.v(TAG, "Viewing user: " + selectedUR.getName() + "...");
                     //ControlFactory.getUserController().selectEditUser(selectedUR);
                 }

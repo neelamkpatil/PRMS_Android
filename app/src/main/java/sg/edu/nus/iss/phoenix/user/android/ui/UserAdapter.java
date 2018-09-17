@@ -8,14 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
-
 
 import java.util.ArrayList;
 
 import sg.edu.nus.iss.phoenix.R;
-import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.user.entity.Role;
 import sg.edu.nus.iss.phoenix.user.entity.User;
 
@@ -25,9 +22,10 @@ import sg.edu.nus.iss.phoenix.user.entity.User;
 
 public class UserAdapter extends ArrayAdapter<User> {
 
-    public UserAdapter(@NonNull Context context,  ArrayList<User> users) {
+    public UserAdapter(@NonNull Context context, ArrayList<User> users) {
         super(context, 0, users);
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -48,13 +46,13 @@ public class UserAdapter extends ArrayAdapter<User> {
         //userName.setKeyListener(null);
 
         TextView userRole = (TextView) listItemView.findViewById(R.id.maintain_user_role);
-        ArrayList<Role> roles=currentUR.getRoles();
-        String role_show="";
-        for (int i=0;i<roles.size();i++){
+        ArrayList<Role> roles = currentUR.getRoles();
+        String role_show = "";
+        for (int i = 0; i < roles.size(); i++) {
 
-            Role r=roles.get(i);
-            String role_i=r.getRole();
-            role_show+=role_i+":";
+            Role r = roles.get(i);
+            String role_i = r.getRole();
+            role_show += role_i + ":";
         }
         userRole.setText(role_show, TextView.BufferType.NORMAL);
         //userRole.setKeyListener(null);

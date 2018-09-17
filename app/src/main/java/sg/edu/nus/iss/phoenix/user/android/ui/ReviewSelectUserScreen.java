@@ -16,9 +16,6 @@ import java.util.List;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
-import sg.edu.nus.iss.phoenix.radioprogram.android.ui.RadioProgramAdapter;
-import sg.edu.nus.iss.phoenix.radioprogram.android.ui.ReviewSelectProgramScreen;
-import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.user.entity.User;
 
 /**
@@ -56,6 +53,7 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
                 // Log.v(TAG, "Radio program name is " + rp.getRadioProgramName());
                 selectedUR = ur;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // your stuff
@@ -90,8 +88,7 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
                     // Prompt for the selection of a radio program.
                     Toast.makeText(this, "Select a radio program first! Use arrow keys on emulator", Toast.LENGTH_SHORT).show();
                     Log.v(TAG, "There is no selected radio program.");
-                }
-                else {
+                } else {
                     Log.v(TAG, "Selected User: " + selectedUR.getName() + "...");
                     ControlFactory.getReviewSelectUserController().selectUser(selectedUR);
                 }

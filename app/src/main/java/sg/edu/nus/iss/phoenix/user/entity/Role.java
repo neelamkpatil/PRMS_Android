@@ -1,7 +1,5 @@
 package sg.edu.nus.iss.phoenix.user.entity;
 
-import java.util.ArrayList;
-
 /**
  * Created by wangzuxiu on 17/9/18.
  */
@@ -12,8 +10,8 @@ public class Role {
     private static final String DELIMITER = ":";
 
     public Role(String role, String accessPrivilege) {
-        this.role=role;
-        this.accessPrivilege=accessPrivilege;
+        this.role = role;
+        this.accessPrivilege = accessPrivilege;
     }
 
     public String getRole() {

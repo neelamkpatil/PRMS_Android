@@ -1,14 +1,11 @@
 package sg.edu.nus.iss.phoenix.user.android.controller;
 
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.List;
 
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
-import sg.edu.nus.iss.phoenix.radioprogram.android.ui.ProgramListScreen;
-import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.user.android.delegate.RetrieveUsersDelegate;
 import sg.edu.nus.iss.phoenix.user.android.ui.MaintainUserScreen;
 import sg.edu.nus.iss.phoenix.user.android.ui.UserListScreen;
@@ -41,6 +38,7 @@ public class UserController {
     public void usersRetrieved(List<User> users) {
         userListScreen.showUsers(users);
     }
+
     public void maintainedUser() {
         ControlFactory.getMainController().maintainedUser();
     }

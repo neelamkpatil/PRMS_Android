@@ -45,9 +45,9 @@ public class User {
     }
 
     public User(String idIn, String password, String name, ArrayList<Role> roles) {
-        this.name=name;
-        this.password=password;
-        this.roles=roles;
+        this.name = name;
+        this.password = password;
+        this.roles = roles;
         this.id = idIn;
 
     }
