@@ -115,7 +115,8 @@ public class MaintainScheduleScreen extends AppCompatActivity {
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
-
+                Log.v(TAG, "Deleting program slot " + ps2edit.getRadioProgramName() + "...");
+                ControlFactory.getScheduleController().selectDeleteSchedule(ps2edit);
                 return true;
             // Respond to a click on the "Cancel" menu option
             case R.id.action_cancel:
