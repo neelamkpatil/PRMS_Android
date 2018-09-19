@@ -102,7 +102,7 @@ public class UserListScreen extends AppCompatActivity {
                     Log.v(TAG, "There is no selected user.");
                 } else {
                     Log.v(TAG, "Viewing user: " + selectedUR.getName() + "...");
-                    //ControlFactory.getUserController().selectEditUser(selectedUR);
+                    ControlFactory.getUserController().selectEditUser(selectedUR);
                 }
         }
 

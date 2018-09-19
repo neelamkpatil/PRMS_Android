@@ -42,6 +42,7 @@
         <activity android:name=".user.android.ui.UserListScreen"/>
 	    <activity android:name=".schedule.android.ui.ScheduleListScreen" />
         <activity android:name=".schedule.android.ui.MaintainScheduleScreen" />
+        <activity android:name=".user.android.ui.MaintainUserScreen" />
     </application>
 
 </manifest>

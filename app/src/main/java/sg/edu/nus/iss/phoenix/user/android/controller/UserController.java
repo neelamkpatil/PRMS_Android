@@ -1,11 +1,17 @@
 package sg.edu.nus.iss.phoenix.user.android.controller;
 
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
+import sg.edu.nus.iss.phoenix.radioprogram.android.delegate.DeleteProgramDelegate;
+import sg.edu.nus.iss.phoenix.radioprogram.android.ui.MaintainProgramScreen;
+import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
+import sg.edu.nus.iss.phoenix.user.android.delegate.DeleteUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.delegate.RetrieveUsersDelegate;
 import sg.edu.nus.iss.phoenix.user.android.ui.MaintainUserScreen;
 import sg.edu.nus.iss.phoenix.user.android.ui.UserListScreen;
@@ -31,12 +37,46 @@ public class UserController {
 
     public void onDisplayUserList(UserListScreen userListScreen) {
         this.userListScreen = userListScreen;
-        System.out.print("he");
+        System.out.print("onDisplayUserlist");
         new RetrieveUsersDelegate(this).execute("all");
+    }
+
+    public void onDisplayUser(MaintainUserScreen maintainUserScreen) {
+        this.maintainUserScreen = maintainUserScreen;
+        if (ur2edit == null)
+            maintainUserScreen.createUser();
+        else
+            maintainUserScreen.editUser(ur2edit);
     }
 
     public void usersRetrieved(List<User> users) {
         userListScreen.showUsers(users);
+    }
+
+    public void selectEditUser(User user) {
+        ur2edit = user;
+        Log.v(TAG, "Editing user details: " + user.getRoles() + "...");
+        Intent intent = new Intent(MainController.getApp(), MaintainUserScreen.class);
+        MainController.displayScreen(intent);
+    }
+    public void selectDeleteUser(User user) {
+        new DeleteUserDelegate(this).execute(user.getId());
+    }
+
+    public void userDeleted(boolean result) {
+        // Go back to UserList screen with refreshed programs.
+        startUseCase();
+//        if (result) {
+//            startUseCase();
+//        } else {
+//
+//        }
+
+    }
+
+    public void selectCancelCreateUser() {
+        // Go back to UserList screen with refreshed programs.
+        startUseCase();
     }
 
     public void maintainedUser() {
