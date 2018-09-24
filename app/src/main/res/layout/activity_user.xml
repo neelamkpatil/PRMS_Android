@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,13 +12,24 @@
         android:textSize="20sp"
         android:textStyle="bold"
         tools:text="User Id" />
-
     <EditText
         android:id="@+id/maintain_user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="User Id" />
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Password" />
+    <EditText
+        android:id="@+id/maintain_user_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        tools:text="Password" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,13 +37,11 @@
         android:textSize="20sp"
         android:textStyle="bold"
         tools:text="User Name" />
-
     <EditText
         android:id="@+id/maintain_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="User name" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,37 +49,28 @@
         android:textSize="20sp"
         android:textStyle="bold"
         tools:text="User Role" />
-
-    <EditText
-        android:id="@+id/maintain_user_role"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLength="20"
-        android:text="Admin"
-        tools:text="Admin" />
-
     <CheckBox
         android:id="@+id/maintain_user_role_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="admin" />
-
+        android:text="admin"
+        android:onClick="onCheckboxClicked"/>
     <CheckBox
         android:id="@+id/maintain_user_role_manager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="manager" />
-
+        android:text="manager"
+        android:onClick="onCheckboxClicked"/>
     <CheckBox
         android:id="@+id/maintain_user_role_presenter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="presenter" />
-
+        android:text="presenter"
+        android:onClick="onCheckboxClicked"/>
     <CheckBox
         android:id="@+id/maintain_user_role_producer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="producer" />
-
+        android:text="producer"
+        android:onClick="onCheckboxClicked"/>
 </LinearLayout>

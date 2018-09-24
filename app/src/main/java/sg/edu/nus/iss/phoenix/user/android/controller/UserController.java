@@ -10,9 +10,11 @@ import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.radioprogram.android.delegate.DeleteProgramDelegate;
 import sg.edu.nus.iss.phoenix.radioprogram.android.ui.MaintainProgramScreen;
-import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
+
+import sg.edu.nus.iss.phoenix.user.android.delegate.CreateUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.delegate.DeleteUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.delegate.RetrieveUsersDelegate;
+import sg.edu.nus.iss.phoenix.user.android.delegate.UpdateUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.ui.MaintainUserScreen;
 import sg.edu.nus.iss.phoenix.user.android.ui.UserListScreen;
 import sg.edu.nus.iss.phoenix.user.entity.User;
@@ -76,6 +78,26 @@ public class UserController {
 
     public void selectCancelCreateUser() {
         // Go back to UserList screen with refreshed programs.
+        startUseCase();
+    }
+    public void selectCreateUser() {
+        ur2edit = null;
+        Intent intent = new Intent(MainController.getApp(), MaintainUserScreen.class);
+        MainController.displayScreen(intent);
+    }
+
+    public void selectCreateUser(User user) {
+        new CreateUserDelegate(this).execute(user);
+    }
+    public void userCreated(boolean success) {
+        // Go back to ProgramList screen with refreshed programs.
+        startUseCase();
+    }
+    public void selectUpdateUser(User user) {
+        new UpdateUserDelegate(this).execute(user);
+    }
+    public void userUpdated(boolean success) {
+        // Go back to ProgramList screen with refreshed programs.
         startUseCase();
     }
 

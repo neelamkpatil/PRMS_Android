@@ -46,7 +46,7 @@ public class UserListScreen extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ControlFactory.getUserController().selectCreateUser();
+               ControlFactory.getUserController().selectCreateUser();
             }
         });
 
@@ -59,7 +59,7 @@ public class UserListScreen extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 // Log.v(TAG, "Radio program at position " + position + " selected.");
                 User ur = (User) adapterView.getItemAtPosition(position);
-                // Log.v(TAG, "Radio program name is " + rp.getRadioProgramName());
+                 Log.v(TAG, "Roles is  " + ur.getRoles().get(0).getRole());
                 selectedUR = ur;
             }
 

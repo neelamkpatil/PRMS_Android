@@ -22,6 +22,8 @@ import sg.edu.nus.iss.phoenix.user.entity.User;
 
 public class UserAdapter extends ArrayAdapter<User> {
 
+    private static final String TAG = UserAdapter.class.getName();
+
     public UserAdapter(@NonNull Context context, ArrayList<User> users) {
         super(context, 0, users);
     }
@@ -45,6 +47,8 @@ public class UserAdapter extends ArrayAdapter<User> {
         userName.setText(currentUR.getName(), TextView.BufferType.NORMAL);
         //userName.setKeyListener(null);
 
+       // Log.d(TAG, "Adapter password is +++++++++++++++ " + currentUR.getPassword());
+
         TextView userRole = (TextView) listItemView.findViewById(R.id.maintain_user_role);
         ArrayList<Role> roles = currentUR.getRoles();
         String role_show = "";
@@ -53,6 +57,7 @@ public class UserAdapter extends ArrayAdapter<User> {
             Role r = roles.get(i);
             String role_i = r.getRole();
             role_show += role_i + ":";
+            Log.d(TAG, "Adapter role is " + role_i);
         }
         userRole.setText(role_show, TextView.BufferType.NORMAL);
         //userRole.setKeyListener(null);
