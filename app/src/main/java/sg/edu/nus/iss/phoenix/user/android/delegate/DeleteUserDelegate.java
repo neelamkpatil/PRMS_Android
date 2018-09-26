@@ -65,7 +65,9 @@ public class DeleteUserDelegate extends AsyncTask<String, Void, Boolean> {
             httpURLConnection.setUseCaches (false);
             System.out.println(httpURLConnection.getResponseCode());
             Log.v(TAG, "Http DELETE response " + httpURLConnection.getResponseCode());
-            success = true;
+            if(httpURLConnection.getResponseCode()==200){
+                success = true;
+            }
         } catch (IOException exception) {
             Log.v(TAG, exception.getMessage());
         } finally {

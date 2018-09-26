@@ -65,14 +65,13 @@ public class UserController {
         new DeleteUserDelegate(this).execute(user.getId());
     }
 
-    public void userDeleted(boolean result) {
+    public void userDeleted(boolean success) {
         // Go back to UserList screen with refreshed programs.
-        startUseCase();
-//        if (result) {
-//            startUseCase();
-//        } else {
-//
-//        }
+        if(success){
+            startUseCase();
+        }else{
+            maintainUserScreen.deleteWarning();
+        }
 
     }
 
@@ -91,7 +90,12 @@ public class UserController {
     }
     public void userCreated(boolean success) {
         // Go back to ProgramList screen with refreshed programs.
-        startUseCase();
+        if(success){
+            startUseCase();
+        }else{
+            maintainUserScreen.creationWarning();
+        }
+
     }
     public void selectUpdateUser(User user) {
         new UpdateUserDelegate(this).execute(user);

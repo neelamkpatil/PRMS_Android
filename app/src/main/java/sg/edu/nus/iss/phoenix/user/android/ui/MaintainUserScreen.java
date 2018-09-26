@@ -292,4 +292,13 @@ public class MaintainUserScreen extends AppCompatActivity {
             mURIdEditText.setKeyListener(null);
         }
     }
+    public void deleteWarning() {
+        Log.d(TAG,"can not create user! already exists");
+        Toast.makeText(this,"User can not be deleted because he is assigned to a program slot!",Toast.LENGTH_LONG).show();
+    }
+
+    public void creationWarning() {
+        Log.d(TAG,"can not create user! already exists");
+        Toast.makeText(this,"User already exists!",Toast.LENGTH_LONG).show();
+    }
 }
