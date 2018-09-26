@@ -158,7 +158,7 @@ public class MaintainScheduleScreen extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         // If this is a new program slot, hide the "Delete" menu item.
-        if (tmpPS == null) {
+        if (tmpPS == null || tmpPS.getId() == null || tmpPS.getId().equals("-1")) {
             MenuItem menuItem = menu.findItem(R.id.action_delete);
             menuItem.setVisible(false);
         }
@@ -173,24 +173,25 @@ public class MaintainScheduleScreen extends AppCompatActivity {
             case R.id.action_save:
                 // Save radio program.
                 System.out.println("tmps"+tmpPS);
-                if (tmpPS == null || tmpPS.getId().equalsIgnoreCase("-1")) { // Newly created.
-                    Log.v(TAG, "Saving schedule " + mPSNameEditText.getText().toString() + "...");
-                    ProgramSlot ps = new ProgramSlot(mPSIdEditText.getText().toString(),mPSNameEditText.getText().toString(),
-                            mPSDateEditText.getText().toString(),mPSSttimeEditText.getText().toString(), mPSDurationEditText.getText().toString(),mPSPresenterEditText.getText().toString(),mPSProducerEditText.getText().toString());
-                    ControlFactory.getScheduleController().selectCreateSchedule(ps);
-                    System.out.println("pssave:"+ps);
-                }
-                else { // Edited.
-                    System.out.println("tmps"+tmpPS);
-                    if (tmpPS != null ) { // edited
+                if (validateFormat()) {
+                    if (tmpPS == null || tmpPS.getId() == null || tmpPS.getId().equalsIgnoreCase("-1")) { // Newly created.
                         Log.v(TAG, "Saving schedule " + mPSNameEditText.getText().toString() + "...");
-                        ProgramSlot ps = new ProgramSlot(mPSIdEditText.getText().toString(), mPSNameEditText.getText().toString(),
-                                mPSDateEditText.getText().toString(), mPSSttimeEditText.getText().toString(), mPSDurationEditText.getText().toString(), mPSPresenterEditText.getText().toString(), mPSProducerEditText.getText().toString());
-                        ControlFactory.getScheduleController().selectUpdateSchedule(ps);
-                        System.out.println("pssave:" + ps);
+                        ProgramSlot ps = new ProgramSlot(mPSIdEditText.getText().toString(),mPSNameEditText.getText().toString(),
+                                mPSDateEditText.getText().toString(),mPSSttimeEditText.getText().toString(), mPSDurationEditText.getText().toString(),mPSPresenterEditText.getText().toString(),mPSProducerEditText.getText().toString());
+                        ControlFactory.getScheduleController().selectCreateSchedule(ps);
+                        System.out.println("pssave:"+ps);
                     }
-
+                    else { // Edited.
+                        if (tmpPS != null ) { // edited
+                            Log.v(TAG, "Saving schedule " + mPSNameEditText.getText().toString() + "...");
+                            ProgramSlot ps = new ProgramSlot(mPSIdEditText.getText().toString(), mPSNameEditText.getText().toString(),
+                                    mPSDateEditText.getText().toString(), mPSSttimeEditText.getText().toString(), mPSDurationEditText.getText().toString(), mPSPresenterEditText.getText().toString(), mPSProducerEditText.getText().toString());
+                            ControlFactory.getScheduleController().selectUpdateSchedule(ps);
+                            System.out.println("pssave:" + ps);
+                        }
+                    }
                 }
+
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:

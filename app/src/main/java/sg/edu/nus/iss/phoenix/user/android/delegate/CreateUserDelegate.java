@@ -78,8 +78,11 @@ public class CreateUserDelegate extends AsyncTask<User, Void, Boolean> {
             dos.writeUTF(json.toString());
             dos.write(256);
             Log.v("json",json.toString());
-            Log.v(TAG, "Http PUT response " + httpURLConnection.getResponseCode());
-            success = true;
+            int result = httpURLConnection.getResponseCode();
+            Log.v(TAG, "Http PUT response " + result);
+            if (result == 200){
+                success = true;
+            }
         } catch (IOException exception) {
             Log.v(TAG, exception.getMessage());
         } finally {

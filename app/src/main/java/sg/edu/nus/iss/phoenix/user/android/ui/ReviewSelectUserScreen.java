@@ -39,7 +39,7 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
         setContentView(R.layout.activity_review_select_user);
 
         Intent intent = getIntent();
-        role = intent.getStringExtra("role");
+        role = intent.getStringExtra("userType");
         Log.d(TAG, "role = " + role);
 
         ArrayList<User> users = new ArrayList<User>();

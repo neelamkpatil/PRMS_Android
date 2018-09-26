@@ -154,7 +154,7 @@ public class MaintainUserScreen extends AppCompatActivity {
                     ur2edit.setName(mURNameEditText.getText().toString());
                     ur2edit.setId(mURIdEditText.getText().toString());
                     ur2edit.setPassword(mURPasswordEditText.getText().toString());
-                    Log.v(TAG, "user role ...." +ur2edit.getRoles().get(0).getRole());
+                    //Log.v(TAG, "user role ...." +ur2edit.getRoles().get(0).getRole());
                     CheckBox mURadminCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_admin)   ;
                     CheckBox mURmanagerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_manager);
                     CheckBox mURpresenterCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_presenter);
@@ -239,7 +239,7 @@ public class MaintainUserScreen extends AppCompatActivity {
         }
 
         if(!(adminChecked||managerChecked||presenterChecked||producerChecked)){
-            Toast.makeText(getApplicationContext(), "Please enter roles", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please select a role", Toast.LENGTH_SHORT).show();
             isValid = false;
         }
         return isValid;
@@ -291,12 +291,10 @@ public class MaintainUserScreen extends AppCompatActivity {
         }
     }
     public void deleteWarning() {
-        Log.d(TAG,"can not create user! already exists");
         Toast.makeText(this,"User can not be deleted because he is assigned to a program slot!",Toast.LENGTH_LONG).show();
     }
 
     public void creationWarning() {
-        Log.d(TAG,"can not create user! already exists");
         Toast.makeText(this,"User already exists!",Toast.LENGTH_LONG).show();
     }
 }
