@@ -53,24 +53,20 @@
         android:id="@+id/maintain_user_role_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="admin"
-        android:onClick="onCheckboxClicked"/>
+        android:text="admin"/>
     <CheckBox
         android:id="@+id/maintain_user_role_manager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="manager"
-        android:onClick="onCheckboxClicked"/>
+        android:text="manager"/>
     <CheckBox
         android:id="@+id/maintain_user_role_presenter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="presenter"
-        android:onClick="onCheckboxClicked"/>
+        android:text="presenter"/>
     <CheckBox
         android:id="@+id/maintain_user_role_producer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="producer"
-        android:onClick="onCheckboxClicked"/>
+        android:text="producer"/>
 </LinearLayout>

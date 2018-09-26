@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,12 +35,15 @@ public class MaintainUserScreen extends AppCompatActivity {
     private ArrayList<String> userRoles = new ArrayList<>();
     private EditText mURPasswordEditText;
     private User ur2edit = null;
+    KeyListener mURIdEditTextKeyListener = null;
+    private boolean adminChecked;
+    private boolean managerChecked;
+    private boolean presenterChecked;
+    private boolean producerChecked;
     private CheckBox mURadminCheckbox;
     private CheckBox mURmanagerCheckbox;
     private CheckBox mURpresenterCheckbox;
     private CheckBox mURproducerCheckbox;
-    KeyListener mURIdEditTextKeyListener = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,26 +53,10 @@ public class MaintainUserScreen extends AppCompatActivity {
         mURIdEditText = (EditText) findViewById(R.id.maintain_user_id);
         mURNameEditText = (EditText) findViewById(R.id.maintain_user_name);
         mURPasswordEditText = (EditText) findViewById(R.id.maintain_user_password);
-        mURadminCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_admin);
+        mURadminCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_admin)   ;
         mURmanagerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_manager);
         mURpresenterCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_presenter);
         mURproducerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_producer);
-
-/*        CheckBox chk = (CheckBox) findViewById(R.id.maintain_user_role_admin);
-        chk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean checked = ((CheckBox) v).isChecked();
-                // Check which checkbox was clicked
-                if (checked){
-                    Role role = new Role("admin", "system administrator");
-                    roles.add(role);
-                }else{
-
-                }
-
-            }
-        });*/
         // Keep the KeyListener for name EditText so as to enable editing after disabling it.
 
         mURIdEditTextKeyListener = mURIdEditText.getKeyListener();
@@ -112,6 +100,27 @@ public class MaintainUserScreen extends AppCompatActivity {
                 // Save radio program.
                 if (ur2edit == null) { // Newly created.
 //                    ur2edit.setRoles(userRoles);
+                    //validation
+                    CheckBox mURadminCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_admin)   ;
+                    CheckBox mURmanagerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_manager);
+                    CheckBox mURpresenterCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_presenter);
+                    CheckBox mURproducerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_producer);
+                   adminChecked  = mURadminCheckbox.isChecked();
+                   managerChecked  = mURmanagerCheckbox.isChecked();
+                   presenterChecked  = mURpresenterCheckbox.isChecked();
+                    producerChecked = mURproducerCheckbox.isChecked();
+                    if(adminChecked){
+                        userRoles.add("admin");
+                    }
+                    if(managerChecked){
+                        userRoles.add("manager");
+                    }
+                    if(presenterChecked){
+                        userRoles.add("presenter");
+                    }
+                    if(producerChecked){
+                        userRoles.add("producer");
+                    }
                     for (String role: userRoles){
                         if(role.equals("admin")){
                             Role roletobeadded = new Role("admin", "system administrator");
@@ -137,37 +146,38 @@ public class MaintainUserScreen extends AppCompatActivity {
                     //ur2edit.setRoles(roles);
                     Log.v(TAG, "Saving user " + mURIdEditText.getText().toString() + "...");
                     User user = new User(mURIdEditText.getText().toString(),mURPasswordEditText.getText().toString(),mURNameEditText.getText().toString(),roles);
-                    ControlFactory.getUserController().selectCreateUser(user);
+                   if(isvalid()) {
+                        ControlFactory.getUserController().selectCreateUser(user);
+                    }
+
                 }
                 else { // Edited.
                     Log.v(TAG, "Saving user " + ur2edit.getName() + "...");
                     ur2edit.setName(mURNameEditText.getText().toString());
                     ur2edit.setId(mURIdEditText.getText().toString());
                     ur2edit.setPassword(mURPasswordEditText.getText().toString());
-                   // ArrayList<Role> roles = ur2edit.getRoles();
-/*                    for(Role role : roles){
-                        Log.d(TAG, "role save+++++++++++++++" + role.getRole());
-                        if(role.getRole().equals("admin")){
-                            roles.add( new Role("admin", "system administrator"));
-                        }
-                        if(role.getRole().equals("manager")){
-                            roles.add( new Role("manager", "station manager"));
-                        }
-                        if(role.getRole().equals("presenter")){
-                            roles.add( new Role("presenter", "radio program presenter"));
-                        }
-                        if(role.getRole().equals("producer")){
-                            roles.add( new Role("producer", "program producer"));
-                        }
-
-                    }*/
                     Log.v(TAG, "user role ...." +ur2edit.getRoles().get(0).getRole());
-/*                    ArrayList<Role> previousRole = ur2edit.getRoles();
-                    ArrayList<String> prevRoleString = new ArrayList<>();
-                    for(Role role : previousRole){
-                        prevRoleString.add(role.getRole());
+                    CheckBox mURadminCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_admin)   ;
+                    CheckBox mURmanagerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_manager);
+                    CheckBox mURpresenterCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_presenter);
+                    CheckBox mURproducerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_producer);
+                    adminChecked  = mURadminCheckbox.isChecked();
+                    managerChecked  = mURmanagerCheckbox.isChecked();
+                    presenterChecked  = mURpresenterCheckbox.isChecked();
+                    producerChecked = mURproducerCheckbox.isChecked();
+                    if(adminChecked){
+                        userRoles.add("admin");
                     }
-                    userRoles.addAll(prevRoleString);*/
+                    if(managerChecked){
+                        userRoles.add("manager");
+                    }
+                    if(presenterChecked){
+                        userRoles.add("presenter");
+                    }
+                    if(producerChecked){
+                        userRoles.add("producer");
+                    }
+
                     for (String role: userRoles){
                         if(role.equals("admin")){
                             Role roletobeadded = new Role("admin", "system administrator");
@@ -191,8 +201,9 @@ public class MaintainUserScreen extends AppCompatActivity {
                         }
                     }
                     ur2edit.setRoles(roles);
-
-                    ControlFactory.getUserController().selectUpdateUser(ur2edit);
+                    if(isvalid()) {
+                        ControlFactory.getUserController().selectUpdateUser(ur2edit);
+                    }
                 }
                 return true;
             // Respond to a click on the "Delete" menu option
@@ -208,6 +219,33 @@ public class MaintainUserScreen extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private boolean isvalid() {
+        boolean isValid = true;
+        String userID = mURIdEditText.getText().toString();
+        String userName = mURIdEditText.getText().toString();
+        String password = mURPasswordEditText.getText().toString();
+
+        if(userID.isEmpty()){
+            mURIdEditText.setError("Please enter userID");
+            isValid =false;
+        }
+        if(userName.isEmpty()){
+            mURNameEditText.setError("Please enter username");
+            isValid = false;
+        }
+        if(password.isEmpty()){
+            mURPasswordEditText.setError("Password can not be empty");
+            isValid = false;
+        }
+
+        if(!(adminChecked||managerChecked||presenterChecked||producerChecked)){
+            Toast.makeText(getApplicationContext(), "Please enter roles", Toast.LENGTH_SHORT).show();
+            isValid = false;
+        }
+        return isValid;
+
     }
 
     @Override
@@ -253,77 +291,5 @@ public class MaintainUserScreen extends AppCompatActivity {
 //            mURRolesEditText.setText(ur2edit.getRoles(), TextView.BufferType.EDITABLE);
             mURIdEditText.setKeyListener(null);
         }
-    }
-
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-        switch(view.getId()) {
-            case R.id.maintain_user_role_admin:
-                if (checked) {
-                    userRoles.add("admin");
-                } else {
-                    for(String role: userRoles) {
-                        if (role.toString().equals("admin")) {
-                            userRoles.remove(role);
-                            break;
-                        }
-                    }
-                }
-                break;
-            case R.id.maintain_user_role_manager:
-                if (checked) {
-                    userRoles.add("manager");
-                } else {
-                    for(String role: userRoles) {
-                        if (role.toString().equals("manager")) {
-                            userRoles.remove(role);
-                            break;
-                        }
-                    }
-                }
-                break;
-            case R.id.maintain_user_role_presenter:
-                if (checked) {
-                    userRoles.add("presenter");
-                } else {
-                    for(String role: userRoles) {
-                        if (role.toString().equals("presenter")) {
-                            userRoles.remove(role);
-                            break;
-                        }
-                    }
-                }
-                break;
-            case R.id.maintain_user_role_producer:
-                if (checked) {
-                    userRoles.add("presenter");
-                } else {
-                    for(String role: userRoles) {
-                        if (role.toString().equals("presenter")) {
-                            userRoles.remove(role);
-                            break;
-                        }
-                    }
-                }
-                break;
-        }
-/*                for (String role: userRoles){
-                    if(role.equals("admin")){
-                        Role roletobeadded = new Role("admin", "system administrator");
-                        roles.add(roletobeadded);
-
-                    }
-                    if(role.equals("manager")){
-                        Role roletobeadded = new Role("manager", "station manager");
-                        roles.add(roletobeadded);
-
-                    }
-                }*/
-
-
-
     }
 }
