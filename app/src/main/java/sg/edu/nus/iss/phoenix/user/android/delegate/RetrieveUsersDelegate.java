@@ -49,6 +49,9 @@ public class RetrieveUsersDelegate extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         Uri builtUri1 = Uri.parse(PRMS_BASE_URL_USER).buildUpon().build();
         Uri builtUri = Uri.withAppendedPath(builtUri1, params[0]).buildUpon().build();
+        if (params.length == 2) {
+            builtUri = Uri.withAppendedPath(builtUri, params[1]).buildUpon().build();
+        }
         Log.v(TAG, builtUri.toString());
         URL url = null;
         try {

@@ -39,6 +39,7 @@
         android:id="@+id/maintain_schedule_program_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:editable="false"
         tools:text="Radio Program Name" />
 
     <RelativeLayout
@@ -136,6 +137,7 @@
         android:id="@+id/maintain_schedule_presenter_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:editable="false"
         tools:text="Presenter" />
 
     <RelativeLayout
@@ -165,6 +167,7 @@
         android:id="@+id/maintain_schedule_producer_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:editable="false"
         tools:text="Producer" />
 
 </LinearLayout>

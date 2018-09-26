@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import sg.edu.nus.iss.phoenix.schedule.android.controller.ReviewSelectScheduleController;
 import sg.edu.nus.iss.phoenix.schedule.android.controller.ScheduleController;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
@@ -31,9 +32,16 @@ public class RetrieveSchedulesDelegate extends AsyncTask<String, Void, String> {
     private static final String TAG = RetrieveSchedulesDelegate.class.getName();
 
     private ScheduleController scheduleController = null;
+    private ReviewSelectScheduleController reviewSelectScheduleController = null;
 
     public RetrieveSchedulesDelegate(ScheduleController scheduleController) {
+        this.reviewSelectScheduleController = null;
         this.scheduleController = scheduleController;
+    }
+
+    public RetrieveSchedulesDelegate(ReviewSelectScheduleController reviewSelectScheduleController) {
+        this.scheduleController = null;
+        this.reviewSelectScheduleController = reviewSelectScheduleController;
     }
 
 
@@ -100,6 +108,8 @@ public class RetrieveSchedulesDelegate extends AsyncTask<String, Void, String> {
 
         if (scheduleController != null)
             scheduleController.schedulesRetrieved(programSlots);
+        else if (reviewSelectScheduleController != null)
+            reviewSelectScheduleController.schedulesRetrieved(programSlots);
 
     }
 }

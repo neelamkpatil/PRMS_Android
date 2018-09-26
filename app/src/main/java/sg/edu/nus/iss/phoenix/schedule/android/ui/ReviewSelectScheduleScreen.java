@@ -1,6 +1,5 @@
-package sg.edu.nus.iss.phoenix.user.android.ui;
+package sg.edu.nus.iss.phoenix.schedule.android.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,47 +16,37 @@ import java.util.List;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
-import sg.edu.nus.iss.phoenix.user.entity.User;
+import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
- * Created by wangzuxiu on 17/9/18.
+ * Created by mia on 25/9/18.
  */
 
-public class ReviewSelectUserScreen extends AppCompatActivity {
+public class ReviewSelectScheduleScreen extends AppCompatActivity {
     // Tag for logging
-    private static final String TAG = ReviewSelectUserScreen.class.getName();
+    private static final String TAG = ReviewSelectScheduleScreen.class.getName();
 
-    private UserAdapter mURAdapter;
-    // private ArrayAdapter<String> adapter = null;
     private ListView mListView;
-    private User selectedUR = null;
-    private String role = null;
+    private ScheduleAdapter mPSAdapter;
+    private ProgramSlot selectedPS = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_review_select_schedule);
 
-        setContentView(R.layout.activity_review_select_user);
+        ArrayList<ProgramSlot> programSlots = new ArrayList<ProgramSlot>();
+        mPSAdapter = new ScheduleAdapter(this, programSlots);
 
-        Intent intent = getIntent();
-        role = intent.getStringExtra("role");
-        Log.d(TAG, "role = " + role);
-
-        ArrayList<User> users = new ArrayList<User>();
-        mURAdapter = new UserAdapter(this, users);
-
-        mListView = (ListView) findViewById(R.id.review_select_ur_list);
-        mListView.setAdapter(mURAdapter);
+        mListView = (ListView) findViewById(R.id.review_select_ps_list);
+        mListView.setAdapter(mPSAdapter);
 
         // Setup the item selection listener
         mListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                // Log.v(TAG, "Radio program at position " + position + " selected.");
-                User ur = (User) adapterView.getItemAtPosition(position);
-                // Log.v(TAG, "Radio program name is " + rp.getRadioProgramName());
-                selectedUR = ur;
+                ProgramSlot ps = (ProgramSlot) adapterView.getItemAtPosition(position);
+                selectedPS = ps;
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 // your stuff
@@ -71,7 +60,7 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         mListView.setSelection(0);
 
-        ControlFactory.getReviewSelectUserController().onDisplay(this, role);
+        ControlFactory.getReviewSelectScheduleController().onDisplay(this);
     }
 
     @Override
@@ -85,20 +74,17 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // User clicked on a menu option in the app bar overflow menu
-//        Intent intent = getIntent();
-//        String userType = intent.getStringExtra("userType");
-
-
         switch (item.getItemId()) {
             // Respond to a click on the "View" menu option
             case R.id.action_select:
-                if (selectedUR == null) {
+                if (selectedPS == null) {
                     // Prompt for the selection of a radio program.
-                    Toast.makeText(this, "Select a User first! Use arrow keys on emulator", Toast.LENGTH_SHORT).show();
-                    Log.v(TAG, "There is no selected user.");
-                } else {
-                    Log.v(TAG, "Selected User: " + selectedUR.getName() + "...");
-                    ControlFactory.getReviewSelectUserController().selectUser(selectedUR, role);
+                    Toast.makeText(this, "Select a program slot first! Use arrow keys on emulator", Toast.LENGTH_SHORT).show();
+                    Log.v(TAG, "There is no selected program slot.");
+                }
+                else {
+                    Log.v(TAG, "Selected program slot: " + selectedPS.getRadioProgramName() + "...");
+                    ControlFactory.getReviewSelectScheduleController().selectSchedule(selectedPS);
                 }
         }
 
@@ -107,13 +93,13 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        ControlFactory.getReviewSelectUserController().selectCancel(role);
+        ControlFactory.getReviewSelectScheduleController().selectCancel();
     }
 
-    public void showUsers(List<User> users) {
-        mURAdapter.clear();
-        for (int i = 0; i < users.size(); i++) {
-            mURAdapter.add(users.get(i));
+    public void showSchedules(List<ProgramSlot> programSlots) {
+        mPSAdapter.clear();
+        for (int i = 0; i < programSlots.size(); i++) {
+            mPSAdapter.add(programSlots.get(i));
         }
     }
 }
