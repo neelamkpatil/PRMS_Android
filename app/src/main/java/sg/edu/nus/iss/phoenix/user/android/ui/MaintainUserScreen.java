@@ -7,7 +7,6 @@ import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
-import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.user.entity.Role;
 import sg.edu.nus.iss.phoenix.user.entity.User;
 
@@ -40,10 +38,10 @@ public class MaintainUserScreen extends AppCompatActivity {
     private boolean managerChecked;
     private boolean presenterChecked;
     private boolean producerChecked;
-    private CheckBox mURadminCheckbox;
-    private CheckBox mURmanagerCheckbox;
-    private CheckBox mURpresenterCheckbox;
-    private CheckBox mURproducerCheckbox;
+    private CheckBox mUserAdminCheckbox;
+    private CheckBox mUserManagerCheckbox;
+    private CheckBox mUserPresenterCheckbox;
+    private CheckBox mUserProducerCheckbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +51,10 @@ public class MaintainUserScreen extends AppCompatActivity {
         mURIdEditText = (EditText) findViewById(R.id.maintain_user_id);
         mURNameEditText = (EditText) findViewById(R.id.maintain_user_name);
         mURPasswordEditText = (EditText) findViewById(R.id.maintain_user_password);
-        mURadminCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_admin)   ;
-        mURmanagerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_manager);
-        mURpresenterCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_presenter);
-        mURproducerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_producer);
+        mUserAdminCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_admin)   ;
+        mUserManagerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_manager);
+        mUserPresenterCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_presenter);
+        mUserProducerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_producer);
         // Keep the KeyListener for name EditText so as to enable editing after disabling it.
 
         mURIdEditTextKeyListener = mURIdEditText.getKeyListener();
@@ -224,7 +222,7 @@ public class MaintainUserScreen extends AppCompatActivity {
     private boolean isvalid() {
         boolean isValid = true;
         String userID = mURIdEditText.getText().toString();
-        String userName = mURIdEditText.getText().toString();
+        String userName = mURNameEditText.getText().toString();
         String password = mURPasswordEditText.getText().toString();
 
         if(userID.isEmpty()){
@@ -259,7 +257,7 @@ public class MaintainUserScreen extends AppCompatActivity {
         mURIdEditText.setText("", TextView.BufferType.EDITABLE);
         mURNameEditText.setText("", TextView.BufferType.EDITABLE);
         mURPasswordEditText.setText("", TextView.BufferType.EDITABLE);
-       // mURadminCheckbox.setChecked(Boolean.TRUE);
+       // mUserAdminCheckbox.setChecked(Boolean.TRUE);
        // checkbox.getText == roles.getRole() checkbox.ischecked
     }
 
@@ -275,16 +273,16 @@ public class MaintainUserScreen extends AppCompatActivity {
             for(Role role : roles){
                 Log.d(TAG, "role+++++++++++++++" + role.getRole());
                 if(role.getRole().equals("admin")){
-                    mURadminCheckbox.setChecked(true);
+                    mUserAdminCheckbox.setChecked(true);
                 }
                 if(role.getRole().equals("manager")){
-                    mURmanagerCheckbox.setChecked(true);
+                    mUserManagerCheckbox.setChecked(true);
                 }
                 if(role.getRole().equals("presenter")){
-                    mURpresenterCheckbox.setChecked(true);
+                    mUserPresenterCheckbox.setChecked(true);
                 }
                 if(role.getRole().equals("producer")){
-                    mURproducerCheckbox.setChecked(true);
+                    mUserProducerCheckbox.setChecked(true);
                 }
 
             }
