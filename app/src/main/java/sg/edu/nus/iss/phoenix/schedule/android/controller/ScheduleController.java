@@ -3,6 +3,7 @@ package sg.edu.nus.iss.phoenix.schedule.android.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -10,11 +11,14 @@ import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.radioprogram.android.delegate.DeleteProgramDelegate;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
+import sg.edu.nus.iss.phoenix.schedule.android.delegate.CreateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.DeleteScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.RetrieveSchedulesDelegate;
+import sg.edu.nus.iss.phoenix.schedule.android.delegate.UpdateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.ui.MaintainScheduleScreen;
 import sg.edu.nus.iss.phoenix.schedule.android.ui.ScheduleListScreen;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
+import sg.edu.nus.iss.phoenix.user.entity.User;
 
 /**
  * Created by Peiyan on 2/9/18.
@@ -27,6 +31,7 @@ public class ScheduleController {
     private ScheduleListScreen scheduleListScreen;
     private MaintainScheduleScreen maintainScheduleScreen;
     private ProgramSlot ps2edit = null;
+    //ProgramSlot ps = null;
 
     public void startUseCase() {
         ps2edit = null;
@@ -51,7 +56,7 @@ public class ScheduleController {
     }
 
     public void selectEditSchedule(ProgramSlot programSlot) {
-        ps2edit = programSlot;
+        ps2edit=programSlot;
         Log.d(TAG, "Editing program slot: " + programSlot.getRadioProgramName() + " "
                 + programSlot.getProgramSlotDate() + " " + programSlot.getProgramSlotSttime() + "...");
 
@@ -60,7 +65,6 @@ public class ScheduleController {
         b.putString("Id", programSlot.getId());
         b.putString("Rpname", programSlot.getRadioProgramName());
         b.putString("Date", programSlot.getProgramSlotDate());
-        b.putString("Sttime", programSlot.getProgramSlotSttime());
         b.putString("Duration", programSlot.getProgramSlotDuration());
         b.putString("Presenter", programSlot.getProgramSlotPresenter());
         b.putString("Producer", programSlot.getProgramSlotProducer());
@@ -88,8 +92,11 @@ public class ScheduleController {
         MainController.displayScreen(intent);
     }
 
+
+
     public void onDisplaySchedule(MaintainScheduleScreen maintainScheduleScreen) {
         this.maintainScheduleScreen = maintainScheduleScreen;
+        System.out.println("PS2 status:"+ps2edit);
         if (ps2edit == null)
             maintainScheduleScreen.createSchedule();
         else if (ps2edit.getId() == null) {
@@ -101,6 +108,8 @@ public class ScheduleController {
     }
 
     public void selectUpdateSchedule(ProgramSlot ps) {
+        Log.d("controller","in controller calling create delegate");
+        new UpdateScheduleDelegate(this).execute(ps);
 
     }
 
@@ -120,11 +129,14 @@ public class ScheduleController {
     }
 
     public void selectCreateSchedule(ProgramSlot ps) {
+        Log.d("controller","in controller");
+        new CreateScheduleDelegate(this).execute(ps);
 
     }
 
     public void scheduleCreated(boolean success) {
         // Go back to ScheduleList screen with refreshed schedules.
+
         startUseCase();
     }
 
@@ -137,8 +149,30 @@ public class ScheduleController {
         ControlFactory.getMainController().maintainedSchedule();
     }
 
-    public void selectedProgram(RadioProgram rpSelected, ProgramSlot ps) {
-        ps.setRadioProgramName(rpSelected.getRadioProgramName());
-        selectEditSchedule(ps);
+    public void selectedProgram(RadioProgram rpSelected) {
+        ps2edit.setRadioProgramName(rpSelected.getRadioProgramName());
+        selectEditSchedule(ps2edit);
+        Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+        MainController.displayScreen(intent);
+    }
+    public void selectedUser(User user,String userType) {
+        if(userType.equalsIgnoreCase("presenter")){
+            ps2edit.setProgramSlotPresenter(user.getId());
+            selectEditSchedule(ps2edit);
+            Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+            MainController.displayScreen(intent);
+        }else if (userType.equalsIgnoreCase("producer")){
+            ps2edit.setProgramSlotProducer(user.getId());
+            selectEditSchedule(ps2edit);
+            Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+            MainController.displayScreen(intent);
+        }
+
+    }
+
+    public void setTmpProgramSlot(ProgramSlot tmpProgramSlot) {
+        ps2edit = tmpProgramSlot;
+        System.out.println("in set");
+        Log.d(TAG, "tmp ps: " + ps2edit);
     }
 }

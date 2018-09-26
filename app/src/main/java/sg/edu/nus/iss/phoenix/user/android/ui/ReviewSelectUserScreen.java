@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.phoenix.user.android.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_review_select_user);
 
         ArrayList<User> users = new ArrayList<User>();
@@ -81,6 +83,10 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // User clicked on a menu option in the app bar overflow menu
+        Intent intent = getIntent();
+        String userType = intent.getStringExtra("userType");
+
+
         switch (item.getItemId()) {
             // Respond to a click on the "View" menu option
             case R.id.action_select:
@@ -89,8 +95,8 @@ public class ReviewSelectUserScreen extends AppCompatActivity {
                     Toast.makeText(this, "Select a radio program first! Use arrow keys on emulator", Toast.LENGTH_SHORT).show();
                     Log.v(TAG, "There is no selected radio program.");
                 } else {
-                    Log.v(TAG, "Selected User: " + selectedUR.getName() + "...");
-                    ControlFactory.getReviewSelectUserController().selectUser(selectedUR);
+                    Log.v(TAG, "Selected User: " + selectedUR.getId() + "...");
+                    ControlFactory.getReviewSelectUserController().selectUser(selectedUR,userType);
                 }
         }
 

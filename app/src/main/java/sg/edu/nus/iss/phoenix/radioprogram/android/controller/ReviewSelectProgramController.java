@@ -44,7 +44,7 @@ public class ReviewSelectProgramController {
         Log.v(TAG, "Selected radio program: " + radioProgram.getRadioProgramName() + ".");
         // To call the base use case controller with the selected radio program.
         // At present, call the MainController instead.
-        ControlFactory.getMainController().selectedProgram(rpSelected);
+        ControlFactory.getScheduleController().selectedProgram(rpSelected);
     }
 
     public void selectCancel() {

@@ -99,4 +99,9 @@ public class ProgramSlot {
     public void setProgramSlotProducer(String programSlotProducer) {
         this.programSlotProducer = programSlotProducer;
     }
+
+    @Override
+    public String toString() {
+        return getId()+" "+getRadioProgramName()+" "+getProgramSlotDate();
+    }
 }
