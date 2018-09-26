@@ -1,6 +1,7 @@
 package sg.edu.nus.iss.phoenix.schedule.android.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
@@ -101,34 +104,31 @@ public class MaintainScheduleScreen extends AppCompatActivity {
         tmpPS=getProgramSlot();
         System.out.println("In post create");
         if(mPSIdEditText.getText().toString()!=null){
-           // int size=ScheduleListScreen.getSize();
-          //  String id=Integer.toString(size);
             tmpPS.setId(mPSIdEditText.getText().toString());
             System.out.println("ID"+mPSIdEditText.getText().toString());
-//+            System.out.println("ID"+ps2edit.getId());
         }
 
-        if(mPSNameEditText.getText().toString()!=null){
+        if(!mPSNameEditText.getText().toString().equals("")){
             System.out.println("name"+mPSNameEditText.getText().toString());
             tmpPS.setRadioProgramName(mPSNameEditText.getText().toString());
 
         }
-        if(mPSDateEditText.getText().toString()!=null){
+        if(!mPSDateEditText.getText().toString().equals("")){
             tmpPS.setProgramSlotDate(mPSDateEditText.getText().toString());
             System.out.println("test"+mPSDateEditText.getText().toString());
         }
-        if (mPSSttimeEditText.getText().toString() != null) {
+        if (!mPSSttimeEditText.getText().toString().equals("")) {
             tmpPS.setProgramSlotSttime(mPSSttimeEditText.getText().toString());
             System.out.println("time"+mPSSttimeEditText.getText().toString());
         }
-        if(mPSDurationEditText.getText().toString()!=null){
+        if(!mPSDurationEditText.getText().toString().equals("")){
             tmpPS.setProgramSlotDuration(mPSDurationEditText.getText().toString());
             System.out.println("duration"+mPSDurationEditText.getText().toString());
         }
-        if(mPSPresenterEditText.getText().toString()!=null){
+        if(!mPSPresenterEditText.getText().toString().equals("")){
             tmpPS.setProgramSlotPresenter(mPSPresenterEditText.getText().toString());
         }
-        if(mPSProducerEditText.getText().toString()!=null){
+        if(!mPSProducerEditText.getText().toString().equals("")){
             tmpPS.setProgramSlotProducer(mPSProducerEditText.getText().toString());
         }
 
@@ -216,12 +216,12 @@ public class MaintainScheduleScreen extends AppCompatActivity {
     public void createSchedule() {
         this.tmpPS = null;
         mPSIdEditText.setText("-1");
-        mPSNameEditText.setText("", TextView.BufferType.EDITABLE);
+        mPSNameEditText.setText("", TextView.BufferType.NORMAL);
         mPSDateEditText.setText("", TextView.BufferType.EDITABLE);
         mPSSttimeEditText.setText("", TextView.BufferType.EDITABLE);
         mPSDurationEditText.setText("", TextView.BufferType.EDITABLE);
-        mPSPresenterEditText.setText("", TextView.BufferType.EDITABLE);
-        mPSProducerEditText.setText("", TextView.BufferType.EDITABLE);
+        mPSPresenterEditText.setText("", TextView.BufferType.NORMAL);
+        mPSProducerEditText.setText("", TextView.BufferType.NORMAL);
 
     }
 
@@ -229,31 +229,114 @@ public class MaintainScheduleScreen extends AppCompatActivity {
         this.tmpPS = ps2edit;
         if (ps2edit != null) {
             mPSIdEditText.setText(ps2edit.getId());
-            mPSNameEditText.setText(ps2edit.getRadioProgramName(), TextView.BufferType.EDITABLE);
+            mPSNameEditText.setText(ps2edit.getRadioProgramName(), TextView.BufferType.NORMAL);
             mPSDateEditText.setText(ps2edit.getProgramSlotDate(), TextView.BufferType.EDITABLE);
             mPSSttimeEditText.setText(ps2edit.getProgramSlotSttime(), TextView.BufferType.EDITABLE);
             mPSDurationEditText.setText(ps2edit.getProgramSlotDuration(), TextView.BufferType.EDITABLE);
-            mPSPresenterEditText.setText(ps2edit.getProgramSlotPresenter(), TextView.BufferType.EDITABLE);
-            mPSProducerEditText.setText(ps2edit.getProgramSlotProducer(), TextView.BufferType.EDITABLE);
+            mPSPresenterEditText.setText(ps2edit.getProgramSlotPresenter(), TextView.BufferType.NORMAL);
+            mPSProducerEditText.setText(ps2edit.getProgramSlotProducer(), TextView.BufferType.NORMAL);
         }
     }
 
     public void copySchedule(ProgramSlot ps2edit) {
         this.tmpPS = ps2edit;
+		//this.ps2edit = ps2edit;
         if (ps2edit != null) {
             mPSIdEditText.setText("-1");
-            mPSNameEditText.setText(ps2edit.getRadioProgramName(), TextView.BufferType.EDITABLE);
+            mPSNameEditText.setText(ps2edit.getRadioProgramName(), TextView.BufferType.NORMAL);
             mPSDateEditText.setText("", TextView.BufferType.EDITABLE);
             mPSSttimeEditText.setText("", TextView.BufferType.EDITABLE);
             mPSDurationEditText.setText(ps2edit.getProgramSlotDuration(), TextView.BufferType.EDITABLE);
             mPSPresenterEditText.setText(ps2edit.getProgramSlotPresenter(), TextView.BufferType.NORMAL);
             mPSProducerEditText.setText(ps2edit.getProgramSlotProducer(), TextView.BufferType.NORMAL);
-            mPSNameEditText.setKeyListener(null);
+            mPSNameSelectButton.setClickable(false);
+            mPSNameSelectButton.setBackgroundColor(Color.parseColor("#D3D3D3"));
+            mPSPresenteSelectButton.setClickable(false);
+            mPSPresenteSelectButton.setBackgroundColor(Color.parseColor("#D3D3D3"));
+            mPSProducerSelectButton.setClickable(false);
+            mPSProducerSelectButton.setBackgroundColor(Color.parseColor("#D3D3D3"));
 
         }
     }
 
     public ProgramSlot getProgramSlot() {
         return new ProgramSlot();
+    }
+
+    private boolean validateFormat() {
+        boolean flag = true;
+        if (mPSNameEditText.getText().toString().equals("")){
+            mPSNameEditText.setError("Please select a radio program!");
+            Toast.makeText(this, "Please select a radio program!", Toast.LENGTH_LONG).show();
+            flag = false;
+        }
+        if (mPSDateEditText.getText().toString().equals("")){
+            mPSDateEditText.setError("Please input a date!");
+            flag = false;
+        } else if (!isValidDate(mPSDateEditText.getText().toString())) {
+            mPSDateEditText.setError("Please input a valid future date!");
+            flag = false;
+        }
+        if (mPSSttimeEditText.getText().toString().equals("")){
+            mPSSttimeEditText.setError("Please input a time!");
+            flag = false;
+        } else if (!isValidTime(mPSSttimeEditText.getText().toString())) {
+            mPSSttimeEditText.setError("Please input a valid time!");
+            flag = false;
+        }
+        if (mPSDurationEditText.getText().toString().equals("")){
+            mPSDurationEditText.setError("Please input a duration!");
+            flag = false;
+        } else if (!isValidTime(mPSDurationEditText.getText().toString())) {
+            mPSDurationEditText.setError("Please input a valid duration!");
+            flag = false;
+        }
+        if (mPSPresenterEditText.getText().toString().equals("")){
+            mPSPresenterEditText.setError("Please select a presenter!");
+            flag = false;
+        }
+        if (mPSProducerEditText.getText().toString().equals("")){
+            mPSProducerEditText.setError("Please select a producer!");
+            flag = false;
+        }
+        return flag;
+    }
+
+
+    protected boolean isValidDate(String date) {
+        try {
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date dd = fmt.parse(date);
+            java.util.Date now = new java.util.Date();
+            Log.d(TAG, "date: " + dd.toString() + " now " + now.toString());
+            if (dd.after(now)) {
+                Log.d(TAG, "date: " + dd.toString() + " now " + now.toString());
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean isValidTime(String time) {
+        try {
+            SimpleDateFormat fmt = new SimpleDateFormat("hh:mm:ss");
+            java.util.Date tt = fmt.parse(time);
+            Log.d(TAG, "time: " + tt.toString());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void warning(String action) {
+        if (action.equals("create")) {
+            Toast.makeText(this, "Program slot cannot be created due to time overlapping!", Toast.LENGTH_LONG).show();
+        } else if (action.equals("update")) {
+            Toast.makeText(this, "Program slot cannot be updated due to time overlapping!", Toast.LENGTH_LONG).show();
+        }
+
     }
 }

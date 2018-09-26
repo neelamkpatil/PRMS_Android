@@ -73,8 +73,16 @@ public class UpdateScheduleDelegate extends AsyncTask<ProgramSlot, Void, Boolean
             //dos.writeUTF(json.toString());
            // dos.write(256);
             Log.v(TAG, "JSON response " + json.toString());
-            Log.v(TAG, "Http PUT response " + httpURLConnection.getResponseCode());
-            success = true;
+            int result = httpURLConnection.getResponseCode();
+            Log.v(TAG, "Http PUT response " + result);
+            if (result == 409 || result == 400) {
+                Log.v(TAG, "Http PUT result 409" + result);
+                success = false;
+            } else {
+                Log.v(TAG, "Http PUT result OK" + result);
+                success = true;
+            }
+
         } catch (IOException exception) {
             Log.v(TAG, exception.getMessage());
         } finally {
@@ -93,9 +101,8 @@ public class UpdateScheduleDelegate extends AsyncTask<ProgramSlot, Void, Boolean
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-        if(aBoolean){
-            scheduleController.scheduleCreated(aBoolean);
-        }
+        scheduleController.scheduleCreated(aBoolean);
+
     }
 
 }

@@ -46,7 +46,6 @@
         android:id="@+id/maintain_user_role"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLength="20"
         android:text="Admin"
         tools:text="Admin" />
 

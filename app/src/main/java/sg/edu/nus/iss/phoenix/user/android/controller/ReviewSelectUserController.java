@@ -33,9 +33,9 @@ public class ReviewSelectUserController {
 
     }
 
-    public void onDisplay(ReviewSelectUserScreen reviewSelectUserScreen) {
+    public void onDisplay(ReviewSelectUserScreen reviewSelectUserScreen, String userType) {
         this.reviewSelectUserScreen = reviewSelectUserScreen;
-        new RetrieveUsersDelegate(this).execute("allByRole");
+        new RetrieveUsersDelegate(this).execute("all", userType);
     }
 
     public void usersRetrieved(List<User> users) {
@@ -46,15 +46,13 @@ public class ReviewSelectUserController {
         urSelected = user;
         Log.v(TAG, "Selected radio program: " + user.getName() + ".");
         // To call the base use case controller with the selected radio program.
-        // At present, call the MainController instead.
-        ControlFactory.getScheduleController().selectedUser(urSelected,userType);
+        ControlFactory.getScheduleController().selectedUser(urSelected, userType);
     }
 
-    public void selectCancel() {
+    public void selectCancel(String userType) {
         urSelected = null;
-        Log.v(TAG, "Cancelled the seleciton of radio program.");
+        Log.v(TAG, "Cancelled the selection of user.");
         // To call the base use case controller without selection;
-        // At present, call the MainController instead.
-        ControlFactory.getMainController().selectedUser(urSelected);
+        ControlFactory.getScheduleController().selectedUser(urSelected, userType);
     }
 }
