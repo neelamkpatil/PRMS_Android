@@ -29,8 +29,6 @@ public class MaintainUserScreen extends AppCompatActivity {
 
     private EditText mURIdEditText;
     private EditText mURNameEditText;
-    private ArrayList<Role> roles = new ArrayList<>();
-    private ArrayList<String> userRoles = new ArrayList<>();
     private EditText mURPasswordEditText;
     private User ur2edit = null;
     KeyListener mURIdEditTextKeyListener = null;
@@ -107,41 +105,24 @@ public class MaintainUserScreen extends AppCompatActivity {
                    managerChecked  = mURmanagerCheckbox.isChecked();
                    presenterChecked  = mURpresenterCheckbox.isChecked();
                     producerChecked = mURproducerCheckbox.isChecked();
+                       // add the roles
+                    ArrayList<Role> roles = new ArrayList<>();
                     if(adminChecked){
-                        userRoles.add("admin");
+                        Role tempRole = new Role("admin", "Yes");
+                        roles.add(tempRole);
                     }
                     if(managerChecked){
-                        userRoles.add("manager");
+                        Role tempRole = new Role("manager", "No");
+                        roles.add(tempRole);
                     }
                     if(presenterChecked){
-                        userRoles.add("presenter");
+                        Role tempRole = new Role("producer", "No");
+                        roles.add(tempRole);
                     }
                     if(producerChecked){
-                        userRoles.add("producer");
+                        Role tempRole = new Role("presenter", "No");
+                        roles.add(tempRole);
                     }
-                    for (String role: userRoles){
-                        if(role.equals("admin")){
-                            Role roletobeadded = new Role("admin", "system administrator");
-                            roles.add(roletobeadded);
-
-                        }
-                        if(role.equals("manager")){
-                            Role roletobeadded = new Role("manager", "station manager");
-                            roles.add(roletobeadded);
-
-                        }
-                        if(role.equals("presenter")){
-                            Role roletobeadded = new Role("presenter", "radio program presenter");
-                            roles.add(roletobeadded);
-
-                        }
-                        if(role.equals("producer")){
-                            Role roletobeadded = new Role("producer", "program producer");
-                            roles.add(roletobeadded);
-
-                        }
-                    }
-                    //ur2edit.setRoles(roles);
                     Log.v(TAG, "Saving user " + mURIdEditText.getText().toString() + "...");
                     User user = new User(mURIdEditText.getText().toString(),mURPasswordEditText.getText().toString(),mURNameEditText.getText().toString(),roles);
                    if(isvalid()) {
@@ -159,44 +140,28 @@ public class MaintainUserScreen extends AppCompatActivity {
                     CheckBox mURmanagerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_manager);
                     CheckBox mURpresenterCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_presenter);
                     CheckBox mURproducerCheckbox = (CheckBox) findViewById(R.id.maintain_user_role_producer);
+
                     adminChecked  = mURadminCheckbox.isChecked();
                     managerChecked  = mURmanagerCheckbox.isChecked();
                     presenterChecked  = mURpresenterCheckbox.isChecked();
                     producerChecked = mURproducerCheckbox.isChecked();
+
+                    ArrayList<Role> roles = new ArrayList<>();
                     if(adminChecked){
-                        userRoles.add("admin");
+                        Role tempRole = new Role("admin", "Yes");
+                        roles.add(tempRole);
                     }
                     if(managerChecked){
-                        userRoles.add("manager");
+                        Role tempRole = new Role("manager", "No");
+                        roles.add(tempRole);
                     }
                     if(presenterChecked){
-                        userRoles.add("presenter");
+                        Role tempRole = new Role("producer", "No");
+                        roles.add(tempRole);
                     }
                     if(producerChecked){
-                        userRoles.add("producer");
-                    }
-
-                    for (String role: userRoles){
-                        if(role.equals("admin")){
-                            Role roletobeadded = new Role("admin", "system administrator");
-                            roles.add(roletobeadded);
-
-                        }
-                        if(role.equals("manager")){
-                            Role roletobeadded = new Role("manager", "station manager");
-                            roles.add(roletobeadded);
-
-                        }
-                        if(role.equals("presenter")){
-                            Role roletobeadded = new Role("presenter", "radio program presenter");
-                            roles.add(roletobeadded);
-
-                        }
-                        if(role.equals("producer")){
-                            Role roletobeadded = new Role("producer", "program producer");
-                            roles.add(roletobeadded);
-
-                        }
+                        Role tempRole = new Role("presenter", "No");
+                        roles.add(tempRole);
                     }
                     ur2edit.setRoles(roles);
                     if(isvalid()) {
@@ -224,20 +189,22 @@ public class MaintainUserScreen extends AppCompatActivity {
         String userID = mURIdEditText.getText().toString();
         String userName = mURNameEditText.getText().toString();
         String password = mURPasswordEditText.getText().toString();
-
+         //check and throw error if userID is empty
         if(userID.isEmpty()){
             mURIdEditText.setError("Please enter userID");
             isValid =false;
         }
+        //check and throw error if username is empty
         if(userName.isEmpty()){
             mURNameEditText.setError("Please enter username");
             isValid = false;
         }
+        //check and throw error if password is empty
         if(password.isEmpty()){
             mURPasswordEditText.setError("Password can not be empty");
             isValid = false;
         }
-
+        //check and display message if no role has been selected
         if(!(adminChecked||managerChecked||presenterChecked||producerChecked)){
             Toast.makeText(getApplicationContext(), "Please select a role", Toast.LENGTH_SHORT).show();
             isValid = false;
@@ -265,10 +232,12 @@ public class MaintainUserScreen extends AppCompatActivity {
         this.ur2edit = ur2edit;
         if (ur2edit != null) {
             mURIdEditText.setText(ur2edit.getId(), TextView.BufferType.NORMAL);
+            //edit name
             mURNameEditText.setText(ur2edit.getName(), TextView.BufferType.EDITABLE);
+            //edit password
             mURPasswordEditText.setText(ur2edit.getPassword(), TextView.BufferType.EDITABLE);
             Log.d(TAG, "passwod+++++++++++++++" + ur2edit.getPassword());
-
+            // edit roles
             ArrayList<Role> roles = ur2edit.getRoles();
             for(Role role : roles){
                 Log.d(TAG, "role+++++++++++++++" + role.getRole());
