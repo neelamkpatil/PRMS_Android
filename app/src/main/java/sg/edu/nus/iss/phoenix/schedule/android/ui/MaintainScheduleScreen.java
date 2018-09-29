@@ -32,8 +32,6 @@ public class MaintainScheduleScreen extends AppCompatActivity {
     // Tag for logging
     private static final String TAG = MaintainScheduleScreen.class.getName();
 
-    // For displaying, ProgramName, Presenter, Producer should be TextView
-    // Currently we are using EditText for testing convenience
     private TextView mPSIdEditText;
     private EditText mPSNameEditText;
     private EditText mPSDateEditText;
@@ -46,19 +44,11 @@ public class MaintainScheduleScreen extends AppCompatActivity {
     private Button mPSPresenteSelectButton;
     private Button mPSProducerSelectButton;
 
-//    KeyListener mPSNameEditTextKeyListener = null;
-//    KeyListener mPSPresenterEditTextKeyListener = null;
-//    KeyListener mPSProducerEditTextKeyListener = null;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        //tmpPS=getProgramSlot();
 
-        // Find all relevant views that we will need to read user input from
-        // TextView id only for coding convenience, it will be delete when implementation finished
         mPSIdEditText = (TextView) findViewById(R.id.maintain_schedule_id_text_view);
         mPSNameEditText = (EditText) findViewById(R.id.maintain_schedule_program_name_text_view);
         mPSDateEditText = (EditText) findViewById(R.id.maintain_schedule_date_text_view);
@@ -97,8 +87,6 @@ public class MaintainScheduleScreen extends AppCompatActivity {
         });
     }
 
-
-
     public void saveCurrentProgramSlot(){
 
         tmpPS=getProgramSlot();
@@ -135,7 +123,7 @@ public class MaintainScheduleScreen extends AppCompatActivity {
     }
 
 
-        @Override
+    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
@@ -241,7 +229,6 @@ public class MaintainScheduleScreen extends AppCompatActivity {
 
     public void copySchedule(ProgramSlot ps2edit) {
         this.tmpPS = ps2edit;
-		//this.ps2edit = ps2edit;
         if (ps2edit != null) {
             mPSIdEditText.setText("-1");
             mPSNameEditText.setText(ps2edit.getRadioProgramName(), TextView.BufferType.NORMAL);
@@ -311,7 +298,6 @@ public class MaintainScheduleScreen extends AppCompatActivity {
             java.util.Date now = new java.util.Date();
             Log.d(TAG, "date: " + dd.toString() + " now " + now.toString());
             if (dd.after(now)) {
-                Log.d(TAG, "date: " + dd.toString() + " now " + now.toString());
                 return true;
             } else {
                 return false;

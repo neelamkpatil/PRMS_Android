@@ -34,11 +34,11 @@ public class ProgramSlot {
         this.programSlotProducer = programSlotProducer;
     }
 
-    public ProgramSlot(String radioProgramName, String programSlotDuration, String programSlotDate, String programSlotSttime) {
+    public ProgramSlot(String radioProgramName, String programSlotDuration, String programSlotPresenter, String programSlotProducer) {
         this.radioProgramName = radioProgramName;
         this.programSlotDuration = programSlotDuration;
-        this.programSlotDate = programSlotDate;
-        this.programSlotSttime = programSlotSttime;
+        this.programSlotPresenter = programSlotPresenter;
+        this.programSlotProducer = programSlotProducer;
     }
 
     public ProgramSlot() {

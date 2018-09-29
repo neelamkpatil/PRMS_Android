@@ -13,9 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import sg.edu.nus.iss.phoenix.radioprogram.android.delegate.CreateProgramDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.controller.ScheduleController;
-import sg.edu.nus.iss.phoenix.schedule.android.ui.MaintainScheduleScreen;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 import static sg.edu.nus.iss.phoenix.core.android.delegate.DelegateHelper.PRMS_BASE_URL_SCHEDULE;

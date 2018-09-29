@@ -25,6 +25,7 @@ public class ProgramController {
 
     public void startUseCase() {
         rp2edit = null;
+        Log.d("program controller", MainController.getApp().toString());
         Intent intent = new Intent(MainController.getApp(), ProgramListScreen.class);
         MainController.displayScreen(intent);
     }

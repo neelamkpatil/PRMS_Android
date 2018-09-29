@@ -59,7 +59,6 @@ public class MainController {
     }
 
     public void selectMaintainSchedule() {
-        // This is the placeholder for starting the Maintain Schedule use case.
 		ControlFactory.getScheduleController().startUseCase();
     }
 

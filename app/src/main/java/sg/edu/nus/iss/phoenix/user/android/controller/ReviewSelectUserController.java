@@ -1,14 +1,12 @@
 package sg.edu.nus.iss.phoenix.user.android.controller;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
 import java.util.List;
 
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
-import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.user.android.delegate.RetrieveUsersDelegate;
 import sg.edu.nus.iss.phoenix.user.android.ui.ReviewSelectUserScreen;
 import sg.edu.nus.iss.phoenix.user.entity.User;

@@ -19,7 +19,7 @@ import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
 
 /**
- * Created by mia on 25/9/18.
+ * Created by Peiyan on 25/9/18.
  */
 
 public class ReviewSelectScheduleScreen extends AppCompatActivity {

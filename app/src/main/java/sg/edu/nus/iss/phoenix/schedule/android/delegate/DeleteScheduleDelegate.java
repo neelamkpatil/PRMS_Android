@@ -11,10 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import sg.edu.nus.iss.phoenix.radioprogram.android.controller.ProgramController;
 import sg.edu.nus.iss.phoenix.schedule.android.controller.ScheduleController;
 
-import static sg.edu.nus.iss.phoenix.core.android.delegate.DelegateHelper.PRMS_BASE_URL_RADIO_PROGRAM;
 import static sg.edu.nus.iss.phoenix.core.android.delegate.DelegateHelper.PRMS_BASE_URL_SCHEDULE;
 
 /**
@@ -33,7 +31,6 @@ public class DeleteScheduleDelegate extends AsyncTask<String, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... params) {
-        // Encode the name of radio program in case of the presence of special characters.
         String id = null;
         try {
             id = URLEncoder.encode(params[0], "UTF-8");
