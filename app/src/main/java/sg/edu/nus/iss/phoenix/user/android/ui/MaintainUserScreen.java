@@ -116,11 +116,11 @@ public class MaintainUserScreen extends AppCompatActivity {
                         roles.add(tempRole);
                     }
                     if(presenterChecked){
-                        Role tempRole = new Role("producer", "No");
+                        Role tempRole = new Role("presenter", "No");
                         roles.add(tempRole);
                     }
                     if(producerChecked){
-                        Role tempRole = new Role("presenter", "No");
+                        Role tempRole = new Role("producer", "No");
                         roles.add(tempRole);
                     }
                     Log.v(TAG, "Saving user " + mURIdEditText.getText().toString() + "...");
@@ -156,11 +156,11 @@ public class MaintainUserScreen extends AppCompatActivity {
                         roles.add(tempRole);
                     }
                     if(presenterChecked){
-                        Role tempRole = new Role("producer", "No");
+                        Role tempRole = new Role("presenter", "No");
                         roles.add(tempRole);
                     }
                     if(producerChecked){
-                        Role tempRole = new Role("presenter", "No");
+                        Role tempRole = new Role("producer", "No");
                         roles.add(tempRole);
                     }
                     ur2edit.setRoles(roles);
@@ -236,11 +236,9 @@ public class MaintainUserScreen extends AppCompatActivity {
             mURNameEditText.setText(ur2edit.getName(), TextView.BufferType.EDITABLE);
             //edit password
             mURPasswordEditText.setText(ur2edit.getPassword(), TextView.BufferType.EDITABLE);
-            Log.d(TAG, "passwod+++++++++++++++" + ur2edit.getPassword());
             // edit roles
             ArrayList<Role> roles = ur2edit.getRoles();
             for(Role role : roles){
-                Log.d(TAG, "role+++++++++++++++" + role.getRole());
                 if(role.getRole().equals("admin")){
                     mUserAdminCheckbox.setChecked(true);
                 }
