@@ -7,10 +7,11 @@
     android:padding="16dp">
 
     <TextView
-    android:id="@+id/maintain_schedule_id_text_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:text="id" />
+        android:id="@+id/maintain_schedule_id_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:text="id" />
 
     <RelativeLayout
         android:layout_width="match_parent"

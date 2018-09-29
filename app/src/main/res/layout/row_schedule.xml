@@ -10,6 +10,7 @@
         android:id="@+id/maintain_schedule_id_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         tools:text="id" />
 
     <TextView
