@@ -21,6 +21,7 @@ import sg.edu.nus.iss.phoenix.user.entity.User;
 
 /**
  * Created by wangzuxiu on 17/9/18.
+ * Updated by Neelam
  */
 
 public class ReviewSelectUserScreen extends AppCompatActivity {

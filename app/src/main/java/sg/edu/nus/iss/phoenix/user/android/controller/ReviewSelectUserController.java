@@ -12,7 +12,8 @@ import sg.edu.nus.iss.phoenix.user.android.ui.ReviewSelectUserScreen;
 import sg.edu.nus.iss.phoenix.user.entity.User;
 
 /**
- * Created by wangzuxiu on 17/9/18.
+ * Created by wangzuxiu on 17/9/2018
+ * Updated by Neelam,Surbhi, Sriraj
  */
 
 public class ReviewSelectUserController {

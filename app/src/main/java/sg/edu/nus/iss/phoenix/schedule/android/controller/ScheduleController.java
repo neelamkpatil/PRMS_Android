@@ -19,15 +19,10 @@ import sg.edu.nus.iss.phoenix.user.entity.User;
 
 /**
  * Created by Peiyan on 29/9/18.
+ * Updated by Neelam-Create,Update use case 25/09/208
+ * Peiyan-Copy use schedule use case
  */
 
-/**
- * <p><strong>ScheduleController</strong> is the
- * controller of Maintain Schedule use case.</p>
- *
- * @author Peiyan
- * @version 29/09/2018
- */
 
 public class ScheduleController {
     // Tag for logging.

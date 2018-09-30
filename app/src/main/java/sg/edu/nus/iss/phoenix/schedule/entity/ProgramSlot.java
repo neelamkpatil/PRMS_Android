@@ -1,7 +1,7 @@
 package sg.edu.nus.iss.phoenix.schedule.entity;
 
 /**
- * Created by Peiyan on 2/9/18.
+ * Created by Sriraj on 2/9/18.
  */
 
 public class ProgramSlot {

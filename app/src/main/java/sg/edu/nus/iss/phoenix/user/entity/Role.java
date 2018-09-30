@@ -2,6 +2,7 @@ package sg.edu.nus.iss.phoenix.user.entity;
 
 /**
  * Created by wangzuxiu on 17/9/18.
+ * Updated by Surbhi
  */
 
 public class Role {

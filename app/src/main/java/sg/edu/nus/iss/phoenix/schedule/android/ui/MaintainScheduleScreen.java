@@ -26,6 +26,8 @@ import sg.edu.nus.iss.phoenix.user.android.ui.ReviewSelectUserScreen;
 
 /**
  * Created by Peiyan on 2/9/18.
+ * Updated by Neelam -onCreate, saveProgramSlot,create schedule, modify schedule.
+ * Updated by Peiyan-copy schedule, validation
  */
 
 public class MaintainScheduleScreen extends AppCompatActivity {
