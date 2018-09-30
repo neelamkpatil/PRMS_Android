@@ -1,0 +1,70 @@
+package sg.edu.nus.iss.phoenix.schedule.android.ui;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import sg.edu.nus.iss.phoenix.R;
+import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
+import sg.edu.nus.iss.phoenix.schedule.entity.ProgramSlot;
+
+import static android.content.ContentValues.TAG;
+
+/**
+ * Created by Peiyan on 2/9/18.
+ */
+
+public class ScheduleAdapter extends ArrayAdapter<ProgramSlot> {
+
+    public ScheduleAdapter(@NonNull Context context, ArrayList<ProgramSlot> programSlots) {
+        super(context, 0, programSlots);
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View listItemView = convertView;
+        if (listItemView == null) {
+            listItemView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.row_schedule, parent, false);
+        }
+        ProgramSlot currentPS = getItem(position);
+
+        TextView scheduleId = (TextView)listItemView.findViewById(R.id.maintain_schedule_id_text_view);
+        scheduleId.setText(currentPS.getId(), TextView.BufferType.NORMAL);
+
+
+        TextView scheduleProgramName = (TextView)listItemView.findViewById(R.id.maintain_schedule_program_name_text_view);
+        scheduleProgramName.setText(currentPS.getRadioProgramName(), TextView.BufferType.NORMAL);
+
+        TextView scheduleDate = (TextView)listItemView.findViewById(R.id.maintain_schedule_date_text_view);
+        scheduleDate.setText(currentPS.getProgramSlotDate(), TextView.BufferType.NORMAL);
+
+        TextView scheduleSttime = (TextView)listItemView.findViewById(R.id.maintain_schedule_sttime_text_view);
+        scheduleSttime.setText(currentPS.getProgramSlotSttime(), TextView.BufferType.NORMAL);
+
+        TextView scheduleDuration = (TextView)listItemView.findViewById(R.id.maintain_schedule_duration_text_view);
+        scheduleDuration.setText(currentPS.getProgramSlotDuration(), TextView.BufferType.NORMAL);
+
+        TextView schedulePresenter = (TextView)listItemView.findViewById(R.id.maintain_schedule_presenter_text_view);
+        schedulePresenter.setText(currentPS.getProgramSlotPresenter(), TextView.BufferType.NORMAL);
+
+        TextView scheduleProducer = (TextView)listItemView.findViewById(R.id.maintain_schedule_producer_text_view);
+        scheduleProducer.setText(currentPS.getProgramSlotProducer(), TextView.BufferType.NORMAL);
+
+        Log.v(TAG, "Listing program slot: " + currentPS.getId() + " " +
+                currentPS.getRadioProgramName() + " " +
+                currentPS.getProgramSlotSttime() + " " +
+                currentPS.getProgramSlotSttime() + "...");
+
+        return listItemView;
+    }
+}

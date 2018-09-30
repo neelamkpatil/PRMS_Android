@@ -24,6 +24,10 @@ public class RadioProgram {
         return radioProgramDuration;
     }
 
+    public void setRadioProgramName(String radioProgramName) {
+        this.radioProgramName = radioProgramName;
+    }
+
     public void setRadioProgramDescription(String radioProgramDescription) {
         this.radioProgramDescription = radioProgramDescription;
     }
