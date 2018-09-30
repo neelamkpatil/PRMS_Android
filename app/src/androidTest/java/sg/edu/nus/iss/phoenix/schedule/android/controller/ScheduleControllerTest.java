@@ -43,6 +43,13 @@ import org.junit.FixMethodOrder;
  * Created by Peiyan on 28/9/18.
  */
 
+/**
+ * Test of ScheduleController class, to check the CRUD features of program slot.
+ * Note: The test program with name of 'testRPName', test user with id of 'testPresenter'
+ * and 'testProducer' should be stored in database before running test case.
+ * please do check and make sure the existence of program, presenter and producer before running test case.
+ */
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ScheduleControllerTest {
     // Tag for logging
